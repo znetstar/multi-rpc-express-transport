@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Express Router transport for multi-rpc",
   "main": "lib/index.js",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
+  },
   "scripts": {
     "test": "mocha --exit test/index.js",
     "docs": "grunt docs",
