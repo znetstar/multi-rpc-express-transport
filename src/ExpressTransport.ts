@@ -17,29 +17,34 @@ export default class ExpressTransport extends Transport implements ServerSideTra
     constructor(protected serializer: Serializer, public router: Router = Router()) {
         super(serializer);
 
-        router.use(bodyParser.raw());
-        router.use(this.onRequest);
+        router.use(bodyParser.raw({ type: '*/*' }));
+        router.use(this.onRequest.bind(this));
     }
 
 
-    protected onRequest = (req: any, res: any) => {
-        const jsonData = req.body;
-        const rawReq = new Uint8Array(Buffer.concat(jsonData));
-        const clientRequest = new ClientRequest(Transport.uniqueId(), (response?: Response) => {
-            const headers: any = {};
+    protected onRequest(req: any, res: any) {
+        try {
+            const jsonData = (<Buffer>req.body);
+            const rawReq = new Uint8Array(jsonData);
+            const clientRequest = new ClientRequest(Transport.uniqueId(), (response?: Response) => {
+                const headers: any = {};
 
-            if (response) {
-                headers["Content-Type"] = this.serializer.content_type;
+                if (response) {
+                    headers["Content-Type"] = this.serializer.content_type;
 
-                res.writeHead(200, headers);
-                res.end(this.serializer.serialize(response));
-            } else {
-                res.writeHead(204, headers);
-                res.end();
-            }
-        });
+                    res.writeHead(200, headers);
+                    res.end(this.serializer.serialize(response));
+                } else {
+                    res.writeHead(204, headers);
+                    res.end();
+                }
+            });
 
-        this.receive(rawReq, clientRequest);
+            debugger
+            this.receive(rawReq, clientRequest);
+        } catch (err: any) {
+            debugger
+        }
     }
 
     public send(message: Message): Promise<void> {
