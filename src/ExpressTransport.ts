@@ -23,28 +23,23 @@ export default class ExpressTransport extends Transport implements ServerSideTra
 
 
     protected onRequest(req: any, res: any) {
-        try {
-            const jsonData = (<Buffer>req.body);
-            const rawReq = new Uint8Array(jsonData);
-            const clientRequest = new ClientRequest(Transport.uniqueId(), (response?: Response) => {
-                const headers: any = {};
+        const jsonData = (<Buffer>req.body);
+        const rawReq = new Uint8Array(jsonData);
+        const clientRequest = new ClientRequest(Transport.uniqueId(), (response?: Response) => {
+            const headers: any = {};
 
-                if (response) {
-                    headers["Content-Type"] = this.serializer.content_type;
+            if (response) {
+                headers["Content-Type"] = this.serializer.content_type;
 
-                    res.writeHead(200, headers);
-                    res.end(this.serializer.serialize(response));
-                } else {
-                    res.writeHead(204, headers);
-                    res.end();
-                }
-            });
+                res.writeHead(200, headers);
+                res.end(this.serializer.serialize(response));
+            } else {
+                res.writeHead(204, headers);
+                res.end();
+            }
+        });
 
-            debugger
-            this.receive(rawReq, clientRequest);
-        } catch (err: any) {
-            debugger
-        }
+        this.receive(rawReq, clientRequest);
     }
 
     public send(message: Message): Promise<void> {

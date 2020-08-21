@@ -1,6 +1,6 @@
 {
   "name": "multi-rpc-express-transport",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Express Router transport for multi-rpc",
   "main": "lib/index.js",
   "publishConfig": {
