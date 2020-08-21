@@ -1,1 +1,1 @@
-export { default as HTTPTransport } from "./HTTPTransport";
+export { default as ExpressTransport } from "./ExpressTransport";

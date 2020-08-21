@@ -1,7 +1,7 @@
 {
   "name": "multi-rpc-express-transport",
   "version": "1.0.0",
-  "description": "HTTP transport for multi-rpc",
+  "description": "Express Router transport for multi-rpc",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha --exit test/index.js",
@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/znetstar/multi-rpc-http-transport.git"
+    "url": "git+https://github.com/znetstar/multi-rpc-express-transport.git"
   },
   "author": "Zachary Boyd <zachary@zacharyboyd.nyc>",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/znetstar/multi-rpc-http-transport/issues"
+    "url": "https://github.com/znetstar/multi-rpc-express-transport/issues"
   },
-  "homepage": "https://github.com/znetstar/multi-rpc-http-transport#readme",
+  "homepage": "https://github.com/znetstar/multi-rpc-express-transport#readme",
   "dependencies": {
     "@types/express": "^4.17.7",
     "body-parser": "^1.19.0",
@@ -26,6 +26,7 @@
     "multi-rpc-common": "^2.2.6"
   },
   "devDependencies": {
+    "@types/node": "^14.6.0",
     "chai": "^4.2.0",
     "chance": "^1.1.6",
     "get-port": "^5.1.1",
