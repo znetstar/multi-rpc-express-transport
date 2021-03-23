@@ -37,7 +37,7 @@ export default class ExpressTransport extends Transport implements ServerSideTra
                 res.writeHead(204, headers);
                 res.end();
             }
-        });
+        }, { req, res });
 
         this.receive(rawReq, clientRequest);
     }
